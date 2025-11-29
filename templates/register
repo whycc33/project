@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i>Join HSU Canteen Hub</h4>
+                </div>
+                
+                <div class="card-body">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('register') }}">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <hr>
+                        <p class="text-muted small">HSU Student Verification (Required for Analytics)</p>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Student ID</label>
+                            <input type="text" name="student_id" class="form-control" placeholder="e.g., s12345678">
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label">Programme</label>
+                                <select name="programme" class="form-select">
+                                    <option value="BA-AHCC">BA-AHCC</option>
+                                    <option value="BBA-SCM">BBA-SCM</option>
+                                    <option value="BSC-DSBI">BSC-DSBI</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Year</label>
+                                <input type="number" name="admission_year" class="form-control" placeholder="2023" value="2023">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Register Account</button>
+                    </form>
+                </div>
+                
+                <div class="card-footer text-center">
+                    <small>Already have an account? <a href="{{ url_for('login') }}">Login here</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
